@@ -95,7 +95,7 @@ Before running the project, make sure you have Python 3.x installed on your syst
 ## Project Structure
 
 ```plaintext
-purchase-probability-hmm/
+purchase-probability/
 ├── api.py            # Flask API
 ├── hmm.py            # HMM Model
 ├── hmm_model.pkl     # Saved HMM model
