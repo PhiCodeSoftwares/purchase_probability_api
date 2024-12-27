@@ -1,87 +1,105 @@
-# Modelo de Probabilidade de Compra com HMM
+# Purchase Probability Model with HMM
 
-Este projeto implementa um modelo de Máquina de Estados Ocultos (HMM) para prever a probabilidade de um usuário realizar uma compra com base em uma sequência de observações. O modelo é capaz de analisar informações sobre o comportamento de compra e fornecer uma probabilidade de "Compra" ou "Não Compra" com base em um conjunto de variáveis, como necessidade, dinheiro disponível, satisfação e outros fatores.
+This project implements a Hidden Markov Model (HMM) to predict the probability of a user making a purchase based on a sequence of observations. The model analyzes purchase behavior data and provides probabilities for "Purchase" or "No Purchase" based on variables such as need, available money, satisfaction, and other factors.
 
-## Tecnologias Utilizadas
+## Technologies Used
 
 - **Python 3.x**
-- **hmmlearn** - Biblioteca para implementação de HMM
-- **NumPy** - Biblioteca para manipulação de arrays
-- **Tkinter** - Biblioteca para criação da interface gráfica
+- **hmmlearn** - Library for implementing HMM
+- **NumPy** - Library for array manipulation
+- **Flask** - Framework for the API
 
-## Funcionalidade
+## Functionality
 
-A aplicação consiste em duas partes principais:
-1. **Modelo HMM**: Um modelo de Máquina de Estados Ocultos que utiliza um conjunto de probabilidades de transição e emissão para prever os estados ocultos (Compra ou Não Compra) com base nas observações fornecidas.
-2. **Interface Gráfica (UI)**: A interface gráfica permite que o usuário selecione as variáveis que descrevem sua situação de compra e, com base nessas observações, o modelo HMM calcula a probabilidade de realizar uma compra.
+The application consists of two main parts:
+1. **HMM Model**: A Hidden Markov Model that uses transition and emission probabilities to predict hidden states (Purchase or No Purchase) based on the given observations.
+2. **Flask API**: An API to expose the model functionality for external access, allowing users to send observation sequences and receive predictions.
 
-### Observações Possíveis:
-- Necessidade Alta
-- Necessidade Baixa
-- Pouco Dinheiro
-- Muito Dinheiro
-- Satisfação Alta
-- Satisfação Baixa
-- Com Limite
-- Sem Limite
-- Poucos Gastos
-- Muitos Gastos
-- Última Compra Correta
-- Última Compra Errada
+### Possible Observations:
+- High Need
+- Low Need
+- Low Money
+- High Money
+- High Satisfaction
+- Low Satisfaction
+- With Limit
+- No Limit
+- Low Expenses
+- High Expenses
+- Correct Last Purchase
+- Wrong Last Purchase
 
-### Estados Ocultos:
-- Compra
-- Não Compra
+### Hidden States:
+- Purchase
+- No Purchase
 
-## Como Usar
+## How to Use
 
-### Pré-requisitos
+### Prerequisites
 
-Antes de rodar o projeto, você precisa ter o Python 3.x instalado no seu sistema. Além disso, é necessário instalar algumas dependências.
+Before running the project, make sure you have Python 3.x installed on your system. Additionally, you need to install some dependencies.
 
-### Instalação
+### Installation
 
-1. Clone o repositório:
+1. Clone the repository:
 
     ```bash
-    git clone https://github.com/SeuUsuario/probabilidade-compra-hmm.git
-    cd probabilidade-compra-hmm
+    git clone https://github.com/YourUsername/purchase-probability-hmm.git
+    cd purchase-probability-hmm
     ```
 
-2. Crie e ative um ambiente virtual (opcional, mas recomendado):
+2. Create and activate a virtual environment (optional but recommended):
 
     ```bash
     python -m venv venv
-    source venv/bin/activate  # Para Linux/Mac
-    venv\Scripts\activate     # Para Windows
+    source venv/bin/activate  # For Linux/Mac
+    venv\Scripts\activate     # For Windows
     ```
 
-3. Instale as dependências:
+3. Install the dependencies:
 
     ```bash
     pip install -r requirements.txt
     ```
 
-    Ou instale as dependências manualmente:
+    Or install the dependencies manually:
 
     ```bash
-    pip install numpy hmmlearn matplotlib seaborn
+    pip install numpy hmmlearn matplotlib seaborn flask
     ```
 
-### Executando o Projeto
+### Running the Project
 
-1. Após instalar as dependências, basta rodar o script Python principal:
+1. After installing the dependencies, start the Flask API:
 
     ```bash
-    python app.py
+    python api.py
     ```
 
-2. A interface gráfica será aberta. Nela, você poderá selecionar as observações que descrevem sua situação (por exemplo, "Necessidade Alta", "Muito Dinheiro", "Com Limite") e clicar em "Calcular Probabilidade" para obter a probabilidade de compra.
+2. Use any API testing tool (like Postman) or a web browser to interact with the endpoints.
 
-## Estrutura do Projeto
+    - **Get observation options:**
+      ```
+      GET /api/options
+      ```
+
+    - **Get purchase probabilities:**
+      ```
+      POST /api/purchase_accuracy
+      Body (JSON):
+      {
+          "observation_sequence": [0, 3, 5]
+      }
+      ```
+
+## Project Structure
 
 ```plaintext
-probabilidade-compra-hmm/
-├── main.py           # Arquivo principal para rodar o projeto
-├── requirements.txt  # Arquivo com as dependências do projeto
-└── README.md         # Este arquivo
+purchase-probability-hmm/
+├── api.py            # Flask API
+├── hmm.py            # HMM Model
+├── hmm_model.pkl     # Saved HMM model
+├── requirements.txt  # Project dependencies
+├── README.md         # This file
+└── .gitignore        # Git ignore rules
+```
