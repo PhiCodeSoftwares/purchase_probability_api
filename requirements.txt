@@ -2,3 +2,4 @@ numpy
 hmmlearn 
 matplotlib 
 seaborn
+gunicorn
