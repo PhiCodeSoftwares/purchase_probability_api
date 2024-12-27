@@ -4,7 +4,13 @@ import pickle
 
 # HMM Model Class
 class HMMModel:
-    def __init__(self):
+    def __init__(self, run=False):
+        self.model = None
+
+        if run:
+            self.__run__()
+    
+    def __run__(self):
         # Define the state space
         self.states = ["Purchase", "No Purchase"]
         self.n_states = len(self.states)
@@ -85,5 +91,5 @@ class HMMModel:
         return prob_purchase_aggregated, prob_no_purchase_aggregated
     
     def save_model(self):
-        with open("hmm_model.pkl", "wb") as f:
+        with open("./model/hmm_model.pkl", "wb") as f:
             pickle.dump(self, f)

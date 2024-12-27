@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from hmm import HMMModel
+from model.hmm import HMMModel
 import numpy as np
 
 class HMMApp:

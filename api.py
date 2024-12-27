@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
-import pickle
 import numpy as np
-from hmm import *
+from model.hmm import *
 from flask_cors import CORS
 
 # Flask API
@@ -9,9 +8,7 @@ app = Flask(__name__)
 
 CORS(app)
 
-# Load the model from the pickle file
-with open("hmm_model.pkl", "rb") as f:
-    model = pickle.load(f)
+model = HMMModel(run=True)
 
 @app.route("/api/options", methods=["GET"])
 def get_options():
@@ -48,6 +45,9 @@ def purchase_accuracy():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    
+
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(
+        debug=False, 
+        port=8000
+    )
