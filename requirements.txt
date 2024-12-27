@@ -3,4 +3,5 @@ hmmlearn
 matplotlib 
 seaborn
 flask
+flask-cors
 gunicorn
