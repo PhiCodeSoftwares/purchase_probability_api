@@ -2,4 +2,5 @@ numpy
 hmmlearn 
 matplotlib 
 seaborn
+flask
 gunicorn
