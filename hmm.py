@@ -84,8 +84,6 @@ class HMMModel:
 
         return prob_purchase_aggregated, prob_no_purchase_aggregated
     
-if __name__ == "__main__":
-    # Save the HMM model to a pickle file
-    hmm_model = HMMModel()
-    with open("hmm_model.pkl", "wb") as f:
-        pickle.dump(hmm_model, f)
+    def save_model(self):
+        with open("hmm_model.pkl", "wb") as f:
+            pickle.dump(self, f)

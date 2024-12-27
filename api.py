@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import pickle
 import numpy as np
-from hmm import HMMModel
+from hmm import *
 from flask_cors import CORS
 
 # Flask API
