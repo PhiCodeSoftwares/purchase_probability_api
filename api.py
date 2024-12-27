@@ -25,7 +25,7 @@ def get_options():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
-@app.route("/api/purchase_accuracy", methods=["GET"])
+@app.route("/api/purchase_accuracy", methods=["POST"])
 def purchase_accuracy():
     try:
         # Get the observation sequence from the request

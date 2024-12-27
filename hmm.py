@@ -14,7 +14,28 @@ class HMMModel:
             "High Need", "Low Need", "Low Money", "High Money",
             "High Satisfaction", "Low Satisfaction", "With Card Limit",
             "No Card Limit", "Low Expenses", "High Expenses",
-            "Correct Last Purchase", "Wrong Last Purchase"
+            "Correct Last Purchase", "Wrong Last Purchase",
+
+            # Fatores externos/contextuais (External/Contextual Factors)
+            "Active Promotion", "No Promotion",
+            "Upcoming Holiday", "No Upcoming Holiday",
+            "Favorable Weather", "Unfavorable Weather",
+            "In Stock", "Out of Stock",
+            "High Competition", "Low Competition",
+            "Relevant News", "No Relevant News",
+            "Social Media Influence", "No Social Media Influence",
+
+            # Histórico do usuário (User History)
+            "Recent Similar Purchase", "No Recent Similar Purchase",
+            "Browsed Product Page", "Did Not Browse Product Page",
+            "Added to Cart", "Did Not Add to Cart",
+            "Viewed Reviews", "Did Not View Reviews",
+            "Used Coupon Previously", "Did Not Use Coupon Previously",
+
+            # Características do produto (Product Characteristics)
+            "New Product", "Existing Product",
+            "High Average Rating", "Low Average Rating",
+            "Product Complexity", "Product Simplicity"
         ]
         self.n_observations = len(self.observations)
 
@@ -28,10 +49,16 @@ class HMMModel:
         ])
 
         # Define the emission probabilities
-        self.emission_probability = np.array([
-            [0.2, 0.1, 0.05, 0.1, 0.15, 0.05, 0.1, 0.05, 0.1, 0.05, 0.03, 0.02],
-            [0.05, 0.2, 0.1, 0.05, 0.05, 0.15, 0.05, 0.05, 0.05, 0.1, 0.05, 0.1]
+        emission_probs = np.array([
+            [
+                30, 5, 5, 20, 25, 5, 10, 15, 10, 20, 20, 5, 20, 10, 10, 5, 15, 5, 20, 5, 10, 15, 15, 5, 20, 5, 25, 5, 30, 5, 35, 5, 20, 5, 15, 5, 20, 15, 20, 5, 10, 20
+            ],
+            [
+                5, 30, 30, 5, 5, 30, 15, 5, 15, 5, 5, 30, 5, 20, 5, 20, 5, 20, 5, 20, 15, 5, 5, 20, 5, 20, 5, 25, 5, 25, 5, 30, 5, 25, 5, 20, 5, 10, 5, 25, 15, 5
+            ]
         ])
+
+        self.emission_probability = emission_probs / emission_probs.sum(axis=1, keepdims=True)
 
         # Create the HMM model
         self.model = hmm.CategoricalHMM(n_components=self.n_states)
@@ -57,7 +84,8 @@ class HMMModel:
 
         return prob_purchase_aggregated, prob_no_purchase_aggregated
     
-# Save the HMM model to a pickle file
-hmm_model = HMMModel()
-with open("hmm_model.pkl", "wb") as f:
-    pickle.dump(hmm_model, f)
+if __name__ == "__main__":
+    # Save the HMM model to a pickle file
+    hmm_model = HMMModel()
+    with open("hmm_model.pkl", "wb") as f:
+        pickle.dump(hmm_model, f)
