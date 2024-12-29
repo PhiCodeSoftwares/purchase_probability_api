@@ -12,23 +12,16 @@ observations = {
         # (External/Contextual Factors)
         "Active Promotion", "No Promotion",
         "Upcoming Holiday", "No Upcoming Holiday",
-        "Favorable Weather", "Unfavorable Weather",
-        "In Stock", "Out of Stock",
-        "High Competition", "Low Competition",
         "Relevant News", "No Relevant News",
         "Social Media Influence", "No Social Media Influence",
 
         # (User History)
         "Recent Similar Purchase", "No Recent Similar Purchase",
         "Browsed Product Page", "Did Not Browse Product Page",
-        "Added to Cart", "Did Not Add to Cart",
         "Viewed Reviews", "Did Not View Reviews",
-        "Used Coupon Previously", "Did Not Use Coupon Previously",
 
         # (Product Characteristics)
-        "New Product", "Existing Product",
         "High Average Rating", "Low Average Rating",
-        "Product Complexity", "Product Simplicity"
     ],
     "pt-br": [
         "Alta Necessidade", "Baixa Necessidade", "Pouco Dinheiro", "Muito Dinheiro",
@@ -39,23 +32,16 @@ observations = {
         # (Fatores Externos/Contextuais)
         "Promoção Ativa", "Sem Promoção",
         "Feriado Próximo", "Sem Feriado Próximo",
-        "Clima Favorável", "Clima Desfavorável",
-        "Em Estoque", "Fora de Estoque",
-        "Alta Competição", "Baixa Competição",
         "Notícias Relevantes", "Sem Notícias Relevantes",
         "Influência de Mídia Social", "Sem Influência de Mídia Social",
 
         # (Histórico do Usuário)
         "Compra Recente Similar", "Sem Compra Recente Similar",
         "Visualizou Página do Produto", "Não Visualizou Página do Produto",
-        "Adicionado ao Carrinho", "Não Adicionado ao Carrinho",
         "Visualizou Avaliações", "Não Visualizou Avaliações",
-        "Usou Cupom Anteriormente", "Não Usou Cupom Anteriormente",
 
         # (Características do Produto)
-        "Produto Novo", "Produto Existente",
-        "Alta Classificação Média", "Baixa Classificação Média",
-        "Produto Complexo", "Produto Simples"
+        "Alta Classificação Média", "Baixa Classificação Média"
     ]
 }
 
@@ -82,16 +68,18 @@ class HMMModel:
             [0.3, 0.7]
         ])
 
-        # Define the emission probabilities
         emission_probs = np.array([
             [
-                30, 5, 5, 20, 25, 5, 10, 15, 10, 20, 20, 5, 20, 10, 10, 5, 15, 5, 20, 5, 10, 15, 15, 5, 20, 5, 25, 5, 30, 5, 35, 5, 20, 5, 15, 5, 20, 15, 20, 5, 10, 20
+                60, 10, 10, 50, 40, 15, 20, 25, 35, 45, 25, 5, 
+                25, 15, 15, 10, 20, 10, 25, 10, 
+                20, 5, 15, 5, 10, 5, 25, 5
             ],
             [
-                5, 30, 30, 5, 5, 30, 15, 5, 15, 5, 5, 30, 5, 20, 5, 20, 5, 20, 5, 20, 15, 5, 5, 20, 5, 20, 5, 25, 5, 25, 5, 30, 5, 25, 5, 20, 5, 10, 5, 25, 15, 5
+                10, 60, 60, 10, 15, 40, 10, 25, 20, 45, 5, 30, 
+                10, 20, 10, 20, 10, 20, 10, 20, 
+                15, 10, 5, 20, 5, 20, 10, 25
             ]
         ])
-
         self.emission_probability = emission_probs / emission_probs.sum(axis=1, keepdims=True)
 
         # Create the HMM model

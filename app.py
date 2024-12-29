@@ -50,6 +50,6 @@ def purchase_accuracy():
 
 if __name__ == "__main__":
     app.run(
-        debug=False, 
+        debug=True, 
         port=8000
     )
