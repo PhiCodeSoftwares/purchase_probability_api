@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 import numpy as np
-from model.hmm import *
+from model.hmm import HMMModel
 from flask_cors import CORS
 
 # Flask API
@@ -8,13 +8,15 @@ app = Flask(__name__)
 
 CORS(app)
 
-model = HMMModel(run=True)
+model = HMMModel()
 
 @app.route("/api/options", methods=["GET"])
 def get_options():
     try:
+        language = request.args.get("language", default="en") 
+
         options = {
-            "options": model.get_observations()
+            "options": model.get_observations(language)
         }
 
         return jsonify(options)
